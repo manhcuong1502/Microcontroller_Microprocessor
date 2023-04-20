@@ -1,0 +1,16 @@
+/*
+ * timer.h
+ *
+ *  Created on: Nov 5, 2022
+ *      Author: Christian
+ */
+
+#ifndef INC_TIMER_H_
+#define INC_TIMER_H_
+#define N_TIMER_2
+
+void Software_TIM_Init();
+void timer_setting(int, int);
+void timer_run();
+
+#endif /* INC_TIMER_H_ */

@@ -1,0 +1,15 @@
+/*
+ * timer0.h
+ *
+ *  Created on: Oct 3, 2022
+ *      Author: Christian
+ */
+
+#ifndef INC_TIMER0_H_
+#define INC_TIMER0_H_
+
+extern int timer_flag;
+void setTimer(int duration);
+void timerRun();
+
+#endif /* INC_TIMER0_H_ */

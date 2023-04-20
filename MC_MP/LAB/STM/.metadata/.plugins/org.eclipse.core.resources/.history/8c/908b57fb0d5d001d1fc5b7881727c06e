@@ -1,0 +1,14 @@
+/*
+ * timer.c
+ *
+ *  Created on: Nov 5, 2022
+ *      Author: Christian
+ */
+
+#include "timer.h"
+
+int timer_counter[N_TIMERS];
+int timer_flag[N_TIMERS];
+int TIMER_CYCLE = 10;
+
+void

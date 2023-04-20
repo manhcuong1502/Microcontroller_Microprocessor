@@ -1,0 +1,17 @@
+/*
+ * timer.h
+ *
+ *  Created on: Oct 13, 2022
+ *      Author: Christian
+ */
+
+#ifndef INC_TIMER_H_
+#define INC_TIMER_H_
+int counter = 0;
+int led = 1;
+
+
+void timerRun_ex1();
+
+
+#endif /* INC_TIMER_H_ */

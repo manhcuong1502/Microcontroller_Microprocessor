@@ -1,0 +1,20 @@
+01:03:12 **** Incremental Build of configuration Debug for project midterm_vxl ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/led7display.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/led7display.d" -MT"Core/Src/led7display.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/led7display.o"
+arm-none-eabi-gcc -o "midterm_vxl.elf" @"objects.list"   -mcpu=cortex-m3 -T"D:\vxl\LAB\STM\midterm_vxl\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="midterm_vxl.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: midterm_vxl.elf
+ 
+arm-none-eabi-size   midterm_vxl.elf 
+arm-none-eabi-objdump -h -S  midterm_vxl.elf  > "midterm_vxl.list"
+arm-none-eabi-objcopy  -O ihex  midterm_vxl.elf  "midterm_vxl.hex"
+arm-none-eabi-objcopy  -O binary  midterm_vxl.elf  "midterm_vxl.bin"
+   text	   data	    bss	    dec	    hex	filename
+   8304	     64	   1704	  10072	   2758	midterm_vxl.elf
+Finished building: default.size.stdout
+ 
+Finished building: midterm_vxl.hex
+Finished building: midterm_vxl.bin
+ 
+ 
+Finished building: midterm_vxl.list
+ 

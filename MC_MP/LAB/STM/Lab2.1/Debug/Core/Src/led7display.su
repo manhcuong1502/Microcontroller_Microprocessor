@@ -1,0 +1,2 @@
+led7display.c:22:6:led_7_seg_disp	16	static
+led7display.c:28:6:update7SEG	16	static

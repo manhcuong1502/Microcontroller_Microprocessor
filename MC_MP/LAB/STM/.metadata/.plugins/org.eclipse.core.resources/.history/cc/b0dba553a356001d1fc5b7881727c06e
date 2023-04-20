@@ -1,0 +1,87 @@
+/*
+ * timer.c
+ *
+ *  Created on: Oct 13, 2022
+ *      Author: Christian
+ */
+
+#include "timer.h"
+#include "main.h"
+
+int counter = 0;
+int led = 0;
+uint16_t LED_OFF[] = {0x0380, 0x0340, 0x02C0, 0x01C0};
+
+int LED_BUFFER[] = {1,2,3,0};
+
+uint16_t LED7SEG_ON [] = {0x003F, 0x0006, 0x005B, 0x004F, 0x0066,
+							0x006D,	0x007D, 0x0007, 0x007F, 0x006F};
+uint16_t LED7SEG_OFF [] = {0x0040, 0X0079, 0x0024, 0x0030, 0x0019,
+							0x0012, 0x0002, 0x000F, 0x0000, 0x0010};
+
+void timerRun_ex2()
+{
+	counter--;
+	if(counter <= 0){
+		counter = 50;
+		led_7_seg_disp(LED_BUFFER[led]);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6 << led, RESET);
+		HAL_GPIO_WritePin(GPIOA, LED_OFF[led], SET);
+		if (++led > 3) led = 0;
+	}
+}
+
+void timerRun_ex3()
+{
+	counter--;
+	if(counter <= 0){
+		counter = 50;
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9);
+		update7SEG(led);
+		if (++led > 3) led = 0;
+	}
+}
+
+void timerRun_ex4()
+{
+	counter--;
+	if (counter <= 0){
+		if (led % 2 == 0) HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_9);
+		update7SEG(led);
+		if (++led > 3) led = 0;
+	}
+}
+
+void led_7_seg_disp(int num)
+{
+	HAL_GPIO_WritePin(GPIOB, LED7SEG_ON[num], RESET);
+	HAL_GPIO_WritePin(GPIOB, LED7SEG_OFF[num], SET);
+}
+
+const int MAX_LED = 4;
+int index_led = 0;
+int led_buffer [4] = {1 , 2 , 3 , 4};
+void update7SEG (int index) {
+	led_7_seg_disp(index);
+	switch (index) {
+		case 0:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, RESET);
+			HAL_GPIO_WritePin(GPIOA, LED_OFF[0], SET);
+		break ;
+		case 1:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, RESET);
+			HAL_GPIO_WritePin(GPIOA, LED_OFF[1], SET);
+		break ;
+		case 2:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
+			HAL_GPIO_WritePin(GPIOA, LED_OFF[2], SET);
+		break ;
+		case 3:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
+			HAL_GPIO_WritePin(GPIOA, LED_OFF[3], SET);
+
+		break ;
+		default :
+		break ;
+	}
+}

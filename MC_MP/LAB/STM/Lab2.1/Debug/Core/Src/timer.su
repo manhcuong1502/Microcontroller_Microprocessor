@@ -1,0 +1,5 @@
+timer.c:18:6:timerRun_ex2	8	static
+timer.c:30:6:timerRun_ex3	8	static
+timer.c:41:6:settimer_ex4_0	16	static
+timer.c:46:6:settimer_ex4_1	16	static
+timer.c:51:6:timerRun_ex4	4	static

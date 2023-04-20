@@ -1,0 +1,17 @@
+/*
+ * timer.h
+ *
+ *  Created on: Oct 13, 2022
+ *      Author: Christian
+ */
+
+#ifndef INC_TIMER_H_
+#define INC_TIMER_H_
+
+void timerRun_ex1();
+void timerRun_ex2();
+void timerRun_ex3();
+void update7SEG();
+void led_7_seg_disp();
+
+#endif /* INC_TIMER_H_ */

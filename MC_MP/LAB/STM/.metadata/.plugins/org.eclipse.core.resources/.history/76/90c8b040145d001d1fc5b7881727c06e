@@ -1,0 +1,95 @@
+/*
+ * fsm_button.c
+ *
+ *  Created on: Nov 5, 2022
+ *      Author: Christian
+ */
+
+#include "fsm_button.h"
+#include "timer.h"
+
+typedef enum {
+	NORMAL,
+	PRESSED,
+	RELEASED,
+	LONG_PRESSED,
+	WAITING_3s
+} System_State;
+
+System_State state;
+int counter;
+int button;
+
+void System_init(){
+	state = RELEASED;
+	counter = 0;
+	button = -1;
+}
+
+void fsm_simple_buttons_run() {
+	switch(state){
+	case NORMAL:
+	{
+		for (uint8_t i = 0; i < N_BUTTONS; i++){
+			if (is_pressed(i)){
+				button = i;
+				break;
+			}
+		}
+		if (button != -1){
+			state = PRESSED;
+		}
+		// update for normal state at step 3 later
+		break;
+	}
+	case PRESSED:
+	{
+		switch(button){
+		case RST:
+		{
+			counter = 0;
+			break;
+		}
+		case INC:
+		{
+			counter++;
+			if (counter > 9) counter = 0;
+			break;
+		}
+		case DEC:
+		{
+			counter--;
+			if (counter < 0) counter = 9;
+			break;
+		}
+		}
+
+		state = WAITING_3s;
+		break;
+	}
+	case WAITING_3s:
+	{
+		if (!is_pressed(button)){
+			state = RELEASED;
+		}
+		else if (is_pressed_3s(button)){
+			state = LONG_PRESSED;
+			timer_setting(COUNTER_CHANGE, 10);
+		}
+		break;
+	}
+	case LONG_PRESSED:
+	{
+		if ()
+		else if (!is_pressed(button)){
+			state = RELEASED;
+			timer_setting(COUNTER_CHANGE, 0);
+		}
+		break;
+	}
+	}
+
+	// SHOW COUNTER VALUE INTO 7SEG_LED
+	led_7_seg_disp(counter);
+}
+
